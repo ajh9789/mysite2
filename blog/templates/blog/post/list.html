@@ -1,7 +1,14 @@
-<h1>LIST</h1>
+{% extends 'blog/base.html' %}
 
-{% for post in posts %}
-    <h2>
-        <a href="{% url "blog:post_detail" post.id %}">{{ post.title }}</a>
-    </h2>
-{% endfor %}
+{% block content %}
+    <h1>LIST</h1>
+
+    <ul class="list-group">
+        {% for post in posts %}
+            <li class="list-group-item">
+                <a href="{% url "blog:post_detail" post.id %}">{{ post.title }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+
+{% endblock content %}
