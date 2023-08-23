@@ -31,7 +31,7 @@ def post_detail(request, post_id):
     post = get_object_or_404(queryset, id=post_id)
     form = CommentForm()
     comments = post.comments.filter(active=True)
-    return render(request, 'blog/post/cart.html', {'post': post, 'form': form, 'comments': comments})
+    return render(request, 'blog/post/detail.html', {'post': post, 'form': form, 'comments': comments})
 
 
 def post_share(request, post_id):
@@ -63,4 +63,4 @@ def post_comment(request, post_id):
         comment.save()
         return redirect(post)
     comments = post.comments.filter(active=True)
-    return render(request, 'blog/post/cart.html', {'post': post, 'form': form, 'comments': comments})
+    return render(request, 'blog/post/detail.html', {'post': post, 'form': form, 'comments': comments})

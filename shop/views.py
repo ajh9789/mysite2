@@ -1,13 +1,16 @@
 from decimal import Decimal
 
+from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 
 from shop.forms import OrderCreateForm
 from shop.models import Product, OrderItem
+from shop.tasks import order_created
 
 
 # Create your views here.
-def add_cart(request, product_id):
+def add_cart(request):
+    product_id = request.POST.get('id')
     product = get_object_or_404(Product, id=product_id)
     # 세션 'cart' 정보 가져오기
     cart = request.session.get('cart', {})
@@ -19,7 +22,7 @@ def add_cart(request, product_id):
     request.session['cart'] = cart
     request.session.modified = True
 
-    return redirect('shop:cart_detail')
+    return JsonResponse({'cart_length': len(cart.items())})
 
 
 def cart_remove(request, product_id):
@@ -84,6 +87,7 @@ def order_create(request):
                                          quantity=item['quantity'])
             request.session['cart'] = {}
             request.session.modified = True
+            order_created.delay(order.id)
             return render(request, 'shop/order_created.html', {'order': order})
     else:
         form = OrderCreateForm()
