@@ -1,21 +1,24 @@
 from django.db import models
+from django.utils.translation import gettext_lazy as _
+from parler.models import TranslatableModel, TranslatedFields
 
 from blog.models import Post
-from django.utils.translation import gettext_lazy as _
 
 
 # Create your models here.
-class Product(models.Model):
-    name = models.CharField(max_length=200)
+class Product(TranslatableModel):
+    translations = TranslatedFields(
+        name=models.CharField(max_length=200),
+        description=models.TextField(blank=True),
+        price=models.DecimalField(default=0, max_digits=12, decimal_places=2),
+        currency=models.CharField(max_length=3),
+    )
     image = models.ImageField(upload_to='products/%Y/%m/%d', blank=True)
-    description = models.TextField(blank=True)
-    price = models.PositiveBigIntegerField(default=0)
     available = models.BooleanField(default=True)
     posts = models.ManyToManyField(Post, related_name='products')
 
     def __str__(self):
         return self.name
-
 
 class Order(models.Model):
     name = models.CharField(_('name'), max_length=50)

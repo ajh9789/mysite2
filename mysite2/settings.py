@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     "blog.apps.BlogConfig",
     "taggit",
     "rosetta",
+    "parler",
 ]
 
 MIDDLEWARE = [
@@ -63,7 +64,9 @@ ROOT_URLCONF = 'mysite2.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            BASE_DIR / 'templates',
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -173,3 +176,18 @@ LANGUAGES = [
     ('en', _('English')),
     ('ko', _('Korean')),
 ]
+
+LOCALE_PATHS = [
+    BASE_DIR / 'locale',
+]
+
+PARLER_LANGUAGES = {
+    None: (
+        {'code': 'en'},
+        {'code': 'ko'},
+    ),
+    'default': {
+        'fallback': 'en',
+        'hide_untranslated': False,
+    }
+}
