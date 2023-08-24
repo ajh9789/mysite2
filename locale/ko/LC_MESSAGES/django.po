@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-23 15:49+0900\n"
+"POT-Creation-Date: 2023-08-23 19:04+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -44,6 +44,14 @@ msgstr ""
 msgid "title_latest_posts"
 msgstr ""
 
+#: .\blog\templates\blog\pagination.html:6
+msgid "Previous"
+msgstr ""
+
+#: .\blog\templates\blog\pagination.html:12
+msgid "Next"
+msgstr ""
+
 #: .\blog\templates\blog\post\detail.html:11
 msgid "link_share"
 msgstr ""
@@ -58,10 +66,6 @@ msgstr ""
 
 #: .\blog\templates\blog\post\detail.html:28
 msgid "title_comments"
-msgstr ""
-
-#: .\blog\templates\blog\post\list.html:5
-msgid "title_list"
 msgstr ""
 
 #: .\mysite2\settings.py:176
